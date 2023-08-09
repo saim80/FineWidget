@@ -26,6 +26,8 @@ public class FineWidget : ModuleRules
 			new string[]
 			{
 				"Core",
+				"UMG",
+				"FineBase" // https://github.com/saim80/FineBase
 				// ... add other public dependencies that you statically link with here ...
 			}
 			);
