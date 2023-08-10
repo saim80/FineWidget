@@ -22,7 +22,7 @@ class FINEWIDGET_API UFineStackNavigationWidget : public UFineBaseWidget
 
 public:
 	UFineStackNavigationWidget(const FObjectInitializer& ObjectInitializer);
-	
+
 	/// Pushes the given content widget to the stack. If no content widget is pushed, the root content widget is shown.
 	UFUNCTION(BlueprintCallable, Category = "StackNavigation")
 	void Push(UFineStackContentWidget* ContentWidget);
@@ -53,10 +53,12 @@ private:
 	UOverlay* TitleOverlay;
 
 	/// The title bar widget is used to show the title of the front content widget.
-	UPROPERTY(BlueprintReadOnly, Category="StackNavigation", meta = (BindWidgetAnim, AllowPrivateAccess = true))
+	UPROPERTY(BlueprintReadOnly, Category="StackNavigation", Transient,
+		meta = (BindWidgetAnim, AllowPrivateAccess = true))
 	UWidgetAnimation* PushAnimation;
 	/// The title bar widget is used to show the title of the front content widget.
-	UPROPERTY(BlueprintReadOnly, Category="StackNavigation", meta = (BindWidgetAnim, AllowPrivateAccess = true))
+	UPROPERTY(BlueprintReadOnly, Category="StackNavigation", Transient,
+		meta = (BindWidgetAnim, AllowPrivateAccess = true))
 	UWidgetAnimation* PopAnimation;
 
 	/// The content widgets scheduled for pushing. The array becomes empty after the push animation is finished.
