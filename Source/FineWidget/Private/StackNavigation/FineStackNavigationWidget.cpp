@@ -33,17 +33,17 @@ void UFineStackNavigationWidget::Push(UFineStackContentWidget* ContentWidget)
 	// If the current top content widget is valid, add it to BackOverlay.
 	if (IsValid(TopContentWidget))
 	{
-		const auto Slot = BackOverlay->AddChildToOverlay(TopContentWidget);
-		Slot->SetVerticalAlignment(VAlign_Fill);
-		Slot->SetHorizontalAlignment(HAlign_Fill);
+		const auto OverlaySlot = BackOverlay->AddChildToOverlay(TopContentWidget);
+		OverlaySlot->SetVerticalAlignment(VAlign_Fill);
+		OverlaySlot->SetHorizontalAlignment(HAlign_Fill);
 	}
 
 	// Add the new content widget to FrontOverlay.
 	PushQueue.Add(ContentWidget);
 	ContentWidgets.Add(ContentWidget);
-	const auto Slot = FrontOverlay->AddChildToOverlay(ContentWidget);
-	Slot->SetVerticalAlignment(VAlign_Fill);
-	Slot->SetHorizontalAlignment(HAlign_Fill);
+	const auto OverlaySlot = FrontOverlay->AddChildToOverlay(ContentWidget);
+	OverlaySlot->SetVerticalAlignment(VAlign_Fill);
+	OverlaySlot->SetHorizontalAlignment(HAlign_Fill);
 	UpdateTitleBar(ContentWidget);
 
 	// For the pushed widget, register callback for navigation title visibility change.
@@ -87,17 +87,17 @@ void UFineStackNavigationWidget::Pop()
 	// If the current top content widget is valid, add it to BackOverlay.
 	if (IsValid(TopContentWidget))
 	{
-		const auto Slot = BackOverlay->AddChildToOverlay(TopContentWidget);
-		Slot->SetVerticalAlignment(VAlign_Fill);
-		Slot->SetHorizontalAlignment(HAlign_Fill);
+		const auto BackSlot = BackOverlay->AddChildToOverlay(TopContentWidget);
+		BackSlot->SetVerticalAlignment(VAlign_Fill);
+		BackSlot->SetHorizontalAlignment(HAlign_Fill);
 		UpdateTitleBar(TopContentWidget);
 	}
 
 	// Add the new content widget to FrontOverlay.
 	PopQueue.Add(ContentWidget);
-	const auto Slot = FrontOverlay->AddChildToOverlay(ContentWidget);
-	Slot->SetVerticalAlignment(VAlign_Fill);
-	Slot->SetHorizontalAlignment(HAlign_Fill);
+	const auto FrontSlot = FrontOverlay->AddChildToOverlay(ContentWidget);
+	FrontSlot->SetVerticalAlignment(VAlign_Fill);
+	FrontSlot->SetHorizontalAlignment(HAlign_Fill);
 
 	PlayAnimation(PopAnimation);
 }
@@ -118,9 +118,9 @@ void UFineStackNavigationWidget::PopToRoot()
 	// If the current top content widget is valid, add it to BackOverlay.
 	if (IsValid(RootContent))
 	{
-		const auto Slot = BackOverlay->AddChildToOverlay(RootContent);
-		Slot->SetVerticalAlignment(VAlign_Fill);
-		Slot->SetHorizontalAlignment(HAlign_Fill);
+		const auto BackSlot = BackOverlay->AddChildToOverlay(RootContent);
+		BackSlot->SetVerticalAlignment(VAlign_Fill);
+		BackSlot->SetHorizontalAlignment(HAlign_Fill);
 		UpdateTitleBar(RootContent);
 	}
 
@@ -130,9 +130,9 @@ void UFineStackNavigationWidget::PopToRoot()
 		if (Widget != RootContent)
 			PopQueue.Add(Widget);
 	}
-	const auto Slot = FrontOverlay->AddChildToOverlay(ContentWidget);
-	Slot->SetVerticalAlignment(VAlign_Fill);
-	Slot->SetHorizontalAlignment(HAlign_Fill);
+	const auto FrontSlot = FrontOverlay->AddChildToOverlay(ContentWidget);
+	FrontSlot->SetVerticalAlignment(VAlign_Fill);
+	FrontSlot->SetHorizontalAlignment(HAlign_Fill);
 
 	PlayAnimation(PopAnimation);
 }
@@ -211,9 +211,9 @@ void UFineStackNavigationWidget::UpdateTitleBar(UFineStackContentWidget* Content
 	if (IsValid(TitleBarWidget))
 	{
 		TitleBarWidget->UpdateInternal(ContentWidget);
-		const auto Slot = TitleOverlay->AddChildToOverlay(TitleBarWidget);
-		Slot->SetVerticalAlignment(VAlign_Fill);
-		Slot->SetHorizontalAlignment(HAlign_Fill);
+		const auto TitleSlot = TitleOverlay->AddChildToOverlay(TitleBarWidget);
+		TitleSlot->SetVerticalAlignment(VAlign_Fill);
+		TitleSlot->SetHorizontalAlignment(HAlign_Fill);
 		TitleBarWidget->Show();
 	}
 }

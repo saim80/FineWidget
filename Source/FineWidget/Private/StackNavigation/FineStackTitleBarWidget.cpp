@@ -44,18 +44,18 @@ void UFineStackTitleBarWidget::UpdateInternal_Implementation(UFineStackContentWi
 	if (IsValid(NewLeftWidget))
 	{
 		LeftWidget = NewLeftWidget;
-		const auto Slot = LeftOverlay->AddChildToOverlay(NewLeftWidget);
-		Slot->SetVerticalAlignment(VAlign_Fill);
-		Slot->SetHorizontalAlignment(HAlign_Fill);
+		const auto LeftSlot = LeftOverlay->AddChildToOverlay(NewLeftWidget);
+		LeftSlot->SetVerticalAlignment(VAlign_Fill);
+		LeftSlot->SetHorizontalAlignment(HAlign_Fill);
 	}
 	// Get right widget from content widget.
 	UWidget* NewRightWidget = ContentWidget->GetRightBarWidget();
 	if (IsValid(NewRightWidget))
 	{
 		RightWidget = NewRightWidget;
-		const auto Slot = RightOverlay->AddChildToOverlay(NewRightWidget);
-		Slot->SetVerticalAlignment(VAlign_Fill);
-		Slot->SetHorizontalAlignment(HAlign_Fill);
+		const auto RightSlot = RightOverlay->AddChildToOverlay(NewRightWidget);
+		RightSlot->SetVerticalAlignment(VAlign_Fill);
+		RightSlot->SetHorizontalAlignment(HAlign_Fill);
 	}
 	// Get title widget from content widget.
 	UWidget* NewTitleWidget = ContentWidget->GetTitleBarWidget();
@@ -65,17 +65,17 @@ void UFineStackTitleBarWidget::UpdateInternal_Implementation(UFineStackContentWi
 		if (IsValid(NewTitleWidget))
 		{
 			TitleWidget = NewTitleWidget;
-			const auto Slot = TitleOverlay->AddChildToOverlay(NewTitleWidget);
-			Slot->SetVerticalAlignment(VAlign_Fill);
-			Slot->SetHorizontalAlignment(HAlign_Fill);
+			const auto TitleSlot = TitleOverlay->AddChildToOverlay(NewTitleWidget);
+			TitleSlot->SetVerticalAlignment(VAlign_Fill);
+			TitleSlot->SetHorizontalAlignment(HAlign_Fill);
 		}
 	}
 	else
 	{
 		TitleTextBlock->SetText(NewTitleText);
-		const auto Slot = TitleOverlay->AddChildToOverlay(TitleTextBlock);
-		Slot->SetVerticalAlignment(VAlign_Center);
-		Slot->SetHorizontalAlignment(HAlign_Center);
+		const auto TitleSlot = TitleOverlay->AddChildToOverlay(TitleTextBlock);
+		TitleSlot->SetVerticalAlignment(VAlign_Center);
+		TitleSlot->SetHorizontalAlignment(HAlign_Center);
 	}
 
 	BarSizeBox->SetHeightOverride(ContentWidget->GetPreferredBarHeight());
