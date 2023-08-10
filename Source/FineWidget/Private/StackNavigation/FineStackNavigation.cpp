@@ -1,20 +1,20 @@
 // (c) 2023 Pururum LLC. All rights reserved.
 
 
-#include "StackNavigation/FineStackNavigationWidget.h"
+#include "..\..\Public\StackNavigation\FineStackNavigation.h"
 
 #include "FineWidgetLog.h"
-#include "StackNavigation/FineStackContentWidget.h"
-#include "StackNavigation/FineStackTitleBarWidget.h"
+#include "Common/FineContent.h"
+#include "StackNavigation/FineStackTitleBar.h"
 #include "Components/Overlay.h"
 #include "Components/OverlaySlot.h"
 
-UFineStackNavigationWidget::UFineStackNavigationWidget(const FObjectInitializer& ObjectInitializer): Super(
+UFineStackNavigation::UFineStackNavigation(const FObjectInitializer& ObjectInitializer): Super(
 	ObjectInitializer)
 {
 }
 
-void UFineStackNavigationWidget::Push(UFineStackContentWidget* ContentWidget)
+void UFineStackNavigation::Push(UFineContent* ContentWidget)
 {
 	if (!ensure(IsValid(ContentWidget))) return;
 	if (IsPlayingAnimation() && ContentWidgets.Num() > 0)
@@ -23,7 +23,7 @@ void UFineStackNavigationWidget::Push(UFineStackContentWidget* ContentWidget)
 	}
 
 	// Get the current top content widget
-	UFineStackContentWidget* TopContentWidget = nullptr;
+	UFineContent* TopContentWidget = nullptr;
 	if (ContentWidgets.Num() > 0)
 	{
 		TopContentWidget = ContentWidgets.Last();
@@ -51,7 +51,7 @@ void UFineStackNavigationWidget::Push(UFineStackContentWidget* ContentWidget)
 	UpdateTitleBar(ContentWidget);
 
 	// For the pushed widget, register callback for navigation title visibility change.
-	const auto WeakThis = TWeakObjectPtr<UFineStackNavigationWidget>(this);
+	const auto WeakThis = TWeakObjectPtr<UFineStackNavigation>(this);
 	ContentWidget->OnNavigationBarVisibleChanged.BindLambda([=] (auto Widget, auto bVisible)
 	{
 		if (!WeakThis.IsValid()) return;
@@ -74,7 +74,7 @@ void UFineStackNavigationWidget::Push(UFineStackContentWidget* ContentWidget)
 	PlayAnimation(PushAnimation);
 }
 
-void UFineStackNavigationWidget::Pop()
+void UFineStackNavigation::Pop()
 {
 	if (ContentWidgets.Num() <= 1) return;
 	if (IsPlayingAnimation()) return;
@@ -82,7 +82,7 @@ void UFineStackNavigationWidget::Pop()
 	if (!ensure(IsValid(ContentWidget))) return;
 
 	// Get the current top content widget
-	UFineStackContentWidget* TopContentWidget = nullptr;
+	UFineContent* TopContentWidget = nullptr;
 	if (ContentWidgets.Num() > 0)
 	{
 		TopContentWidget = ContentWidgets.Last();
@@ -106,7 +106,7 @@ void UFineStackNavigationWidget::Pop()
 	PlayAnimation(PopAnimation);
 }
 
-void UFineStackNavigationWidget::PopToRoot()
+void UFineStackNavigation::PopToRoot()
 {
 	if (ContentWidgets.Num() <= 1) return;
 	if (IsPlayingAnimation()) return;
@@ -114,7 +114,7 @@ void UFineStackNavigationWidget::PopToRoot()
 	if (!ensure(IsValid(ContentWidget))) return;
 
 	// Get the current top content widget
-	UFineStackContentWidget* RootContent = nullptr;
+	UFineContent* RootContent = nullptr;
 	if (ContentWidgets.Num() > 0)
 	{
 		RootContent = ContentWidgets[0];
@@ -141,7 +141,7 @@ void UFineStackNavigationWidget::PopToRoot()
 	PlayAnimation(PopAnimation);
 }
 
-void UFineStackNavigationWidget::OnAnimationStarted_Implementation(const UWidgetAnimation* Animation)
+void UFineStackNavigation::OnAnimationStarted_Implementation(const UWidgetAnimation* Animation)
 {
 	Super::OnAnimationStarted_Implementation(Animation);
 	if (Animation == PushAnimation)
@@ -163,7 +163,7 @@ void UFineStackNavigationWidget::OnAnimationStarted_Implementation(const UWidget
 	}
 }
 
-void UFineStackNavigationWidget::OnAnimationFinished_Implementation(const UWidgetAnimation* Animation)
+void UFineStackNavigation::OnAnimationFinished_Implementation(const UWidgetAnimation* Animation)
 {
 	Super::OnAnimationFinished_Implementation(Animation);
 	if (Animation == PushAnimation)
@@ -187,12 +187,12 @@ void UFineStackNavigationWidget::OnAnimationFinished_Implementation(const UWidge
 	}
 }
 
-void UFineStackNavigationWidget::UpdateTitleBar(UFineStackContentWidget* ContentWidget)
+void UFineStackNavigation::UpdateTitleBar(UFineContent* ContentWidget)
 {
 	for (UWidget* Child : TitleOverlay->GetAllChildren())
 	{
 		// Cast child to UFineStackTitleBarWidget
-		UFineStackTitleBarWidget* TitleBarWidget = Cast<UFineStackTitleBarWidget>(Child);
+		UFineStackTitleBar* TitleBarWidget = Cast<UFineStackTitleBar>(Child);
 		if (IsValid(TitleBarWidget))
 		{
 			TitleBarWidget->Hide();
@@ -200,7 +200,7 @@ void UFineStackNavigationWidget::UpdateTitleBar(UFineStackContentWidget* Content
 		}
 	}
 	if (!ContentWidget->IsTitleBarVisible()) return;
-	UFineStackTitleBarWidget* TitleBarWidget = nullptr;
+	UFineStackTitleBar* TitleBarWidget = nullptr;
 	// If free title bars are two or more, use the oldest one.
 	// Otherwise, create a new one. Note that we don't want to use the only one in the queue in case it's being removed
 	// with animation.
@@ -211,7 +211,7 @@ void UFineStackNavigationWidget::UpdateTitleBar(UFineStackContentWidget* Content
 	}
 	else
 	{
-		TitleBarWidget = CreateWidget<UFineStackTitleBarWidget>(this, TitleBarClass);
+		TitleBarWidget = CreateWidget<UFineStackTitleBar>(this, TitleBarClass);
 	}
 	// Set up the title bar widget.
 	if (IsValid(TitleBarWidget))

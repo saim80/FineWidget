@@ -5,10 +5,10 @@
 #include "CoreMinimal.h"
 #include "Common/FineBaseWidget.h"
 #include "UObject/Object.h"
-#include "FineStackNavigationWidget.generated.h"
+#include "FineStackNavigation.generated.h"
 
-class UFineStackTitleBarWidget;
-class UFineStackContentWidget;
+class UFineStackTitleBar;
+class UFineContent;
 class UOverlay;
 class UWidgetAnimation;
 /**
@@ -16,16 +16,16 @@ class UWidgetAnimation;
  * logic should be implemented in child classes as widget blueprint. See `W_StackNavigation` blueprint for example.
  */
 UCLASS(Blueprintable, BlueprintType)
-class FINEWIDGET_API UFineStackNavigationWidget : public UFineBaseWidget
+class FINEWIDGET_API UFineStackNavigation : public UFineBaseWidget
 {
 	GENERATED_BODY()
 
 public:
-	UFineStackNavigationWidget(const FObjectInitializer& ObjectInitializer);
+	UFineStackNavigation(const FObjectInitializer& ObjectInitializer);
 
 	/// Pushes the given content widget to the stack. If no content widget is pushed, the root content widget is shown.
 	UFUNCTION(BlueprintCallable, Category = "StackNavigation")
-	void Push(UFineStackContentWidget* ContentWidget);
+	void Push(UFineContent* ContentWidget);
 	/// Pops the top content widget from the stack. If no content widget is popped, the root content widget is shown.
 	UFUNCTION(BlueprintCallable, Category = "StackNavigation")
 	void Pop();
@@ -40,7 +40,7 @@ protected:
 private:
 	/// The content widgets are managed by this widget.
 	UPROPERTY(BlueprintReadOnly, Category="StackNavigation", meta = (AllowPrivateAccess = true))
-	TArray<UFineStackContentWidget*> ContentWidgets;
+	TArray<UFineContent*> ContentWidgets;
 
 	/// The front content widget is the top of the stack.
 	UPROPERTY(BlueprintReadOnly, Category="StackNavigation", meta = (BindWidget, AllowPrivateAccess = true))
@@ -63,20 +63,20 @@ private:
 
 	/// The content widgets scheduled for pushing. The array becomes empty after the push animation is finished.
 	UPROPERTY()
-	TArray<UFineStackContentWidget*> PushQueue;
+	TArray<UFineContent*> PushQueue;
 	/// The content widgets scheduled for popping. The array becomes empty after the pop animation is finished.
 	UPROPERTY()
-	TArray<UFineStackContentWidget*> PopQueue;
+	TArray<UFineContent*> PopQueue;
 
 	/// Update the title bar for a given content widget
 	UFUNCTION()
-	void UpdateTitleBar(UFineStackContentWidget* ContentWidget);
+	void UpdateTitleBar(UFineContent* ContentWidget);
 
 	/// The unused title bar widgets are managed by this widget.
 	UPROPERTY()
-	TArray<UFineStackTitleBarWidget*> FreeTitleBarWidgets;
+	TArray<UFineStackTitleBar*> FreeTitleBarWidgets;
 
 	/// Title bar widget class
 	UPROPERTY(BlueprintReadOnly, EditDefaultsOnly, Category="StackNavigation", meta = (AllowPrivateAccess = true))
-	TSubclassOf<UFineStackTitleBarWidget> TitleBarClass;
+	TSubclassOf<UFineStackTitleBar> TitleBarClass;
 };

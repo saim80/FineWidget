@@ -5,31 +5,34 @@
 #include "CoreMinimal.h"
 #include "Common/FineBaseWidget.h"
 #include "UObject/Object.h"
-#include "FineStackContentWidget.generated.h"
+#include "FineContent.generated.h"
 
-class UFineStackNavigationWidget;
-class UFineStackContentWidget;
-DECLARE_DELEGATE_TwoParams(FOnNavigationBarVisibleChanged, UFineStackContentWidget*, bool);
-DECLARE_DELEGATE_OneParam(FOnNavigationPopRequested, UFineStackContentWidget*);
+class UFineButton;
+class UFineTabButton;
+class UFineStackNavigation;
+class UFineContent;
+DECLARE_DELEGATE_TwoParams(FOnNavigationBarVisibleChanged, UFineContent*, bool);
+DECLARE_DELEGATE_OneParam(FOnNavigationPopRequested, UFineContent*);
 
 /**
  * The base widget class for the content widget to be inserted into UFineStackNavigationWidget.
  */
 UCLASS(Blueprintable, BlueprintType)
-class FINEWIDGET_API UFineStackContentWidget : public UFineBaseWidget
+class FINEWIDGET_API UFineContent : public UFineBaseWidget
 {
 	GENERATED_BODY()
 
 public:
-	UFineStackContentWidget(const FObjectInitializer& ObjectInitializer);
+	UFineContent(const FObjectInitializer& ObjectInitializer);
 
 	/// If true, the content widget is the root of the navigation stack.
 	UPROPERTY(BlueprintReadOnly, Category = "StackNavigation")
 	bool bIsRoot;
 
 	/// A factory method to return a widget to show at the right side of navigation bar of UFineStackNavigationWidget.
-	UFUNCTION(BlueprintCallable, BlueprintImplementableEvent, Category = "StackNavigation")
+	UFUNCTION(BlueprintCallable, BlueprintNativeEvent, Category = "StackNavigation")
 	UWidget* GetRightBarWidget();
+	UWidget* GetRightBarWidget_Implementation();
 
 	/// A factory method to return a widget to show at the left side of navigation bar of UFineStackNavigationWidget.
 	///
@@ -42,6 +45,11 @@ public:
 	/// Set `NavigationTitle` to null to use this method.
 	UFUNCTION(BlueprintCallable, BlueprintImplementableEvent, Category = "StackNavigation")
 	UWidget* GetTitleBarWidget();
+
+	/// A factory method to return a tab button widget to show in tab tab for tab navigation.
+	UFUNCTION(BlueprintCallable, BlueprintNativeEvent, Category = "StackNavigation")
+	UFineTabButton* GetTabButton();
+	UFineTabButton* GetTabButton_Implementation();
 
 	/// A callback to be invoked when navigation bar visibility changes.
 	FOnNavigationBarVisibleChanged OnNavigationBarVisibleChanged;
@@ -73,6 +81,9 @@ public:
 	UFUNCTION(BlueprintCallable, BlueprintNativeEvent, Category = "StackNavigation")
 	void OnPostPop();
 	void OnPostPop_Implementation();
+	UFUNCTION(BlueprintCallable, BlueprintNativeEvent, Category = "StackNavigation")
+	void OnTabSelected();
+	void OnTabSelected_Implementation();
 
 	/// Invoking this will cause navigation stack to pop this content.
 	FOnNavigationPopRequested OnNavigationPopRequested;
@@ -82,7 +93,10 @@ public:
 	void Pop();
 
 	UFUNCTION(BlueprintCallable, BlueprintPure, Category = "StackNavigation")
-	UFineStackNavigationWidget* GetStackNavigation();
+	UFineStackNavigation* GetStackNavigation();
+
+protected:
+	virtual void NativeDestruct() override;
 private:
 	/// Navigation bar title.
 	UPROPERTY(BlueprintReadWrite, EditDefaultsOnly, Category = "StackNavigation", meta = (AllowPrivateAccess = "true"))
@@ -95,7 +109,21 @@ private:
 	UPROPERTY(BlueprintReadWrite, EditDefaultsOnly, Category = "StackNavigation", meta = (AllowPrivateAccess = "true"))
 	float PreferredBarHeight = 50.f;
 
+	/// The class of the back button to be shown in the navigation bar.
+	UPROPERTY(BlueprintReadWrite, EditDefaultsOnly, Category = "StackNavigation", meta = (AllowPrivateAccess = "true"))
+	TSoftClassPtr<UFineButton> BackButtonClass;
+	/// The class of the tab button to be shown in the tab navigation.
+	UPROPERTY(BlueprintReadWrite, EditDefaultsOnly, Category = "StackNavigation", meta = (AllowPrivateAccess = "true"))
+	TSoftClassPtr<UFineTabButton> TabButtonClass;
+
+	UPROPERTY(BlueprintReadOnly, Category="StackNavigation", meta = (AllowPrivateAccess = "true"))
+	UFineButton* BackButton;
+	UPROPERTY(BlueprintReadOnly, Category="TabNavigation", meta = (AllowPrivateAccess = "true"))
+	UFineTabButton* TabButton;
 private:
-	friend class UFineStackNavigationWidget;
-	TWeakObjectPtr<UFineStackNavigationWidget> StackNavigationPtr;
+	friend class UFineStackNavigation;
+	TWeakObjectPtr<UFineStackNavigation> StackNavigationPtr;
+
+	friend class UFineTabNavigation;
+	TWeakObjectPtr<UFineTabNavigation> TabNavigationPtr;
 };

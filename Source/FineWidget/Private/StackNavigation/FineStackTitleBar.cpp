@@ -1,20 +1,20 @@
 // (c) 2023 Pururum LLC. All rights reserved.
 
 
-#include "StackNavigation/FineStackTitleBarWidget.h"
+#include "StackNavigation/FineStackTitleBar.h"
 
-#include "StackNavigation/FineStackContentWidget.h"
+#include "Common/FineContent.h"
 #include "Components/Overlay.h"
 #include "Components/OverlaySlot.h"
 #include "Components/SizeBox.h"
 #include "Components/TextBlock.h"
 
-UFineStackTitleBarWidget::UFineStackTitleBarWidget(const FObjectInitializer& ObjectInitializer): Super(
+UFineStackTitleBar::UFineStackTitleBar(const FObjectInitializer& ObjectInitializer): Super(
 	ObjectInitializer)
 {
 }
 
-void UFineStackTitleBarWidget::UpdateInternal_Implementation(UFineStackContentWidget* ContentWidget)
+void UFineStackTitleBar::UpdateInternal_Implementation(UFineContent* ContentWidget)
 {
 	if (!IsValid(ContentWidget))
 	{

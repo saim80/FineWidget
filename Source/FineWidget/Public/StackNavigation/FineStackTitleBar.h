@@ -5,23 +5,23 @@
 #include "CoreMinimal.h"
 #include "Common/FineBaseWidget.h"
 #include "UObject/Object.h"
-#include "FineStackTitleBarWidget.generated.h"
+#include "FineStackTitleBar.generated.h"
 
 class USizeBox;
 class UWidget;
 class UTextBlock;
 class UOverlay;
-class UFineStackContentWidget;
+class UFineContent;
 /**
  * This widget is a title bar for stack navigation widget. The container for left and right widgets are provided.
  */
 UCLASS(Blueprintable, BlueprintType)
-class FINEWIDGET_API UFineStackTitleBarWidget : public UFineBaseWidget
+class FINEWIDGET_API UFineStackTitleBar : public UFineBaseWidget
 {
 	GENERATED_BODY()
 
 public:
-	UFineStackTitleBarWidget(const FObjectInitializer& ObjectInitializer);
+	UFineStackTitleBar(const FObjectInitializer& ObjectInitializer);
 
 	/// Returns left widget.
 	FORCEINLINE UWidget* GetLeftWidget() const { return LeftWidget; }
@@ -32,8 +32,8 @@ public:
 
 	/// Updates the internal widgets using the given content widget as data source.
 	UFUNCTION(BlueprintCallable, BlueprintNativeEvent, Category = "StackNavigation")
-	void UpdateInternal(UFineStackContentWidget* ContentWidget);
-	virtual void UpdateInternal_Implementation(UFineStackContentWidget* ContentWidget);
+	void UpdateInternal(UFineContent* ContentWidget);
+	virtual void UpdateInternal_Implementation(UFineContent* ContentWidget);
 	
 private:
 	/// Left widget given by the corresponding stack content widget.

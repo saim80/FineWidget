@@ -36,9 +36,10 @@ public:
 protected:
 	virtual void NativeConstruct() override;
 	virtual void NativeDestruct() override;
-	
+
+	FORCEINLINE UButton* GetInnerButton() const { return InnerButton; }
 private:
-	UPROPERTY(BlueprintReadOnly, Category="StackNavigation", meta = (BindWidget, AllowPrivateAccess = true))
+	UPROPERTY(BlueprintReadOnly, Category="FineWidget", meta = (BindWidget, AllowPrivateAccess = true))
 	UButton* InnerButton;
 
 	UFUNCTION(meta = (AllowPrivateAccess = true))
