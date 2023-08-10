@@ -3,7 +3,7 @@
 
 #include "FineWidgetScreen.h"
 
-#include "FineBaseWidget.h"
+#include "Common/FineBaseWidget.h"
 #include "Blueprint/UserWidget.h"
 #include "Kismet/GameplayStatics.h"
 
