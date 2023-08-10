@@ -16,7 +16,7 @@ UFineStackTitleBarWidget::UFineStackTitleBarWidget(const FObjectInitializer& Obj
 
 void UFineStackTitleBarWidget::UpdateInternal_Implementation(UFineStackContentWidget* ContentWidget)
 {
-	if (IsValid(ContentWidget))
+	if (!IsValid(ContentWidget))
 	{
 		return;
 	}

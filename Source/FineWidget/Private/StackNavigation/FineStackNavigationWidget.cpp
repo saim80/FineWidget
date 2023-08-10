@@ -3,6 +3,7 @@
 
 #include "StackNavigation/FineStackNavigationWidget.h"
 
+#include "FineWidgetLog.h"
 #include "StackNavigation/FineStackContentWidget.h"
 #include "StackNavigation/FineStackTitleBarWidget.h"
 #include "Components/Overlay.h"
@@ -16,7 +17,10 @@ UFineStackNavigationWidget::UFineStackNavigationWidget(const FObjectInitializer&
 void UFineStackNavigationWidget::Push(UFineStackContentWidget* ContentWidget)
 {
 	if (!ensure(IsValid(ContentWidget))) return;
-	if (IsPlayingAnimation()) return;
+	if (IsPlayingAnimation() && ContentWidgets.Num() > 0)
+	{
+		FW_WARNING("Pushing a content widget is not allowed while playing animation.");
+	}
 
 	// Get the current top content widget
 	UFineStackContentWidget* TopContentWidget = nullptr;
