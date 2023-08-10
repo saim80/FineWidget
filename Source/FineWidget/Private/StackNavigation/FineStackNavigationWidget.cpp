@@ -19,7 +19,7 @@ void UFineStackNavigationWidget::Push(UFineStackContentWidget* ContentWidget)
 	if (!ensure(IsValid(ContentWidget))) return;
 	if (IsPlayingAnimation() && ContentWidgets.Num() > 0)
 	{
-		FW_WARNING("Pushing a content widget is not allowed while playing animation.");
+		FW_WARNING("Pushing a content widget is not safe while playing animation.");
 	}
 
 	// Get the current top content widget
@@ -148,6 +148,7 @@ void UFineStackNavigationWidget::OnAnimationStarted_Implementation(const UWidget
 	{
 		for (const auto ContentWidget : PushQueue)
 		{
+			ContentWidget->StackNavigationPtr = this;
 			ContentWidget->OnPrePush();
 		}
 	}
@@ -180,6 +181,7 @@ void UFineStackNavigationWidget::OnAnimationFinished_Implementation(const UWidge
 		for (const auto ContentWidget : PopQueue)
 		{
 			ContentWidget->OnPostPop();
+			ContentWidget->StackNavigationPtr.Reset();
 		}
 		PopQueue.Empty();
 	}

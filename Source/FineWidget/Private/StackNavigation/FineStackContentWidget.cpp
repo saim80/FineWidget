@@ -42,3 +42,14 @@ void UFineStackContentWidget::Pop()
 {
 	OnNavigationPopRequested.ExecuteIfBound(this);
 }
+
+UFineStackNavigationWidget* UFineStackContentWidget::GetStackNavigation()
+{
+	// Return strong ptr if weak stack navigation ptr is valid.
+	if (StackNavigationPtr.IsValid())
+	{
+		return StackNavigationPtr.Get();
+	}
+
+	return nullptr;
+}

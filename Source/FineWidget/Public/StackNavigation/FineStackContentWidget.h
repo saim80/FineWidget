@@ -7,6 +7,7 @@
 #include "UObject/Object.h"
 #include "FineStackContentWidget.generated.h"
 
+class UFineStackNavigationWidget;
 class UFineStackContentWidget;
 DECLARE_DELEGATE_TwoParams(FOnNavigationBarVisibleChanged, UFineStackContentWidget*, bool);
 DECLARE_DELEGATE_OneParam(FOnNavigationPopRequested, UFineStackContentWidget*);
@@ -79,6 +80,9 @@ public:
 	/// Pop this content widget from the navigation stack if this is the top content in the stack.
 	UFUNCTION(BlueprintCallable, Category = "StackNavigation")
 	void Pop();
+
+	UFUNCTION(BlueprintCallable, BlueprintPure, Category = "StackNavigation")
+	UFineStackNavigationWidget* GetStackNavigation();
 private:
 	/// Navigation bar title.
 	UPROPERTY(BlueprintReadWrite, EditDefaultsOnly, Category = "StackNavigation", meta = (AllowPrivateAccess = "true"))
@@ -90,4 +94,8 @@ private:
 
 	UPROPERTY(BlueprintReadWrite, EditDefaultsOnly, Category = "StackNavigation", meta = (AllowPrivateAccess = "true"))
 	float PreferredBarHeight = 50.f;
+
+private:
+	friend class UFineStackNavigationWidget;
+	TWeakObjectPtr<UFineStackNavigationWidget> StackNavigationPtr;
 };
