@@ -31,6 +31,7 @@ void UFineWidgetScreen::BeginPlay()
 
 void UFineWidgetScreen::EndPlay(const EEndPlayReason::Type EndPlayReason)
 {
+	Deactivate();
 	HideAnimationStartedEvent.Clear();
 	Super::EndPlay(EndPlayReason);
 }
