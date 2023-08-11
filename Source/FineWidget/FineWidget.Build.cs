@@ -27,6 +27,7 @@ public class FineWidget : ModuleRules
 			{
 				"Core",
 				"UMG",
+				"Paper2D",
 				"FineBase" // https://github.com/saim80/FineBase
 				// ... add other public dependencies that you statically link with here ...
 			}

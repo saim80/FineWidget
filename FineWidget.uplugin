@@ -20,5 +20,15 @@
 			"Type": "Runtime",
 			"LoadingPhase": "Default"
 		}
+	],
+	"Plugins": [
+		{
+			"Name": "FineBase",
+			"Enabled": true
+		},
+		{
+			"Name": "Paper2D",
+			"Enabled": true 
+		}
 	]
 }
