@@ -15,7 +15,7 @@ UFineContent::UFineContent(const FObjectInitializer& ObjectInitializer): Super(O
 	TabButtonClass = UFineTabButton::StaticClass();
 }
 
-UWidget* UFineContent::GetRightBarWidget_Implementation()
+UWidget* UFineContent::GetLeftBarWidget_Implementation()
 {
 	if (bIsRoot)
 	{

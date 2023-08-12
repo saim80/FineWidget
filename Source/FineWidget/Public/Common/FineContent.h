@@ -30,15 +30,15 @@ public:
 	bool bIsRoot;
 
 	/// A factory method to return a widget to show at the right side of navigation bar of UFineStackNavigationWidget.
-	UFUNCTION(BlueprintCallable, BlueprintNativeEvent, Category = "StackNavigation")
+	UFUNCTION(BlueprintCallable, BlueprintImplementableEvent, Category = "StackNavigation")
 	UWidget* GetRightBarWidget();
-	UWidget* GetRightBarWidget_Implementation();
 
 	/// A factory method to return a widget to show at the left side of navigation bar of UFineStackNavigationWidget.
 	///
 	/// If no widget is given, a back button is shown.
-	UFUNCTION(BlueprintCallable, BlueprintImplementableEvent, Category = "StackNavigation")
+	UFUNCTION(BlueprintCallable, BlueprintNativeEvent, Category = "StackNavigation")
 	UWidget* GetLeftBarWidget();
+	UWidget* GetLeftBarWidget_Implementation();
 
 	/// A factory method to return a widget to show at the center of navigation bar of UFineStackNavigationWidget.
 	///

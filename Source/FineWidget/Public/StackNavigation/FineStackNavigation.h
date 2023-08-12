@@ -77,6 +77,6 @@ private:
 	TArray<UFineStackTitleBar*> FreeTitleBarWidgets;
 
 	/// Title bar widget class
-	UPROPERTY(BlueprintReadOnly, EditDefaultsOnly, Category="StackNavigation", meta = (AllowPrivateAccess = true))
+	UPROPERTY(BlueprintReadOnly, EditAnywhere, Category="StackNavigation", meta = (AllowPrivateAccess = true))
 	TSubclassOf<UFineStackTitleBar> TitleBarClass;
 };
