@@ -25,6 +25,9 @@ public:
 
 	UFUNCTION(BlueprintCallable)
 	FORCEINLINE UUserWidget *GetUserWidget() const { return UserWidget; }
+
+	FORCEINLINE void SetWidgetClass(const TSoftClassPtr<UUserWidget>& InWidgetClass) { WidgetClass = InWidgetClass; }
+	FORCEINLINE void SetLayerPriority(const int32& InLayerPriority) { LayerPriority = InLayerPriority; }
 protected:
 	virtual void BeginPlay() override;
 	virtual void EndPlay(const EEndPlayReason::Type EndPlayReason) override;
