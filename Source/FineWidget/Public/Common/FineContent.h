@@ -10,6 +10,7 @@
 class UFineButton;
 class UFineTabButton;
 class UFineStackNavigation;
+class UFineTabNavigation;
 class UFineContent;
 DECLARE_DELEGATE_TwoParams(FOnNavigationBarVisibleChanged, UFineContent*, bool);
 DECLARE_DELEGATE_OneParam(FOnNavigationPopRequested, UFineContent*);

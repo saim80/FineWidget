@@ -1,7 +1,7 @@
 ﻿// (c) 2023 Pururum LLC. All rights reserved.
 
 
-#include "..\..\Public\TabNavigation\FineTabNavigation.h"
+#include "TabNavigation/FineTabNavigation.h"
 
 #include "Common/FineContent.h"
 #include "Common/FineTabButton.h"

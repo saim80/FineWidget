@@ -1,7 +1,7 @@
 // (c) 2023 Pururum LLC. All rights reserved.
 
 
-#include "..\..\Public\StackNavigation\FineStackNavigation.h"
+#include "StackNavigation/FineStackNavigation.h"
 
 #include "FineWidgetLog.h"
 #include "Common/FineContent.h"
