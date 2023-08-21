@@ -28,7 +28,8 @@ public class FineWidget : ModuleRules
 				"Core",
 				"UMG",
 				"Paper2D",
-				"FineBase" // https://github.com/saim80/FineBase
+				"FineBase", // https://github.com/saim80/FineBase
+				"FinePlay", // https://github.com/saim80/FinePlay
 				// ... add other public dependencies that you statically link with here ...
 			}
 			);
@@ -41,6 +42,7 @@ public class FineWidget : ModuleRules
 				"Engine",
 				"Slate",
 				"SlateCore",
+				"GameplayAbilities",
 				// ... add private dependencies that you statically link with here ...	
 			}
 			);
