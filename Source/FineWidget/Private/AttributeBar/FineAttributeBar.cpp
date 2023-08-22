@@ -68,6 +68,10 @@ void UFineAttributeBar::NativePreConstruct()
 void UFineAttributeBar::NativeConstruct()
 {
 	Super::NativeConstruct();
+	if (CharacterGameplay.IsValid())
+	{
+		InitializePercent();
+	}
 }
 
 void UFineAttributeBar::UpdateAfterStatTypeChanged() const

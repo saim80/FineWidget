@@ -30,6 +30,8 @@ public:
 	UFUNCTION(BlueprintCallable)
 	void SetCharacterGameplay(UFineCharacterGameplay* InCharacterGameplay);
 
+	void UpdateStatValueTextBlock() const;
+
 protected:
 	virtual void NativePreConstruct() override;
 	virtual void NativeConstruct() override;
@@ -41,7 +43,6 @@ protected:
 	void EndTrackingValueChanges();
 
 private:
-
 	UPROPERTY(BlueprintReadOnly, EditAnywhere, meta = (AllowPrivateAccess = "true"))
 	EFineAttributeType StatType;
 
@@ -62,9 +63,8 @@ private:
 	UTextBlock* StatMaxValueBlock;
 
 	FOnGameplayAttributeValueChange* GetAttributeChangeDelegate() const;
-	
+
 	void InitializePercent();
-	void UpdateStatValueTextBlock() const;
 
 	UPROPERTY(BlueprintReadOnly, EditAnywhere, meta = (AllowPrivateAccess = "true", BindWidget))
 	UFineAttributeIcon* StatIcon;
