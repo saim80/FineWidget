@@ -43,6 +43,7 @@ public class FineWidget : ModuleRules
 				"Slate",
 				"SlateCore",
 				"GameplayAbilities",
+				"InputCore",
 				// ... add private dependencies that you statically link with here ...	
 			}
 			);
