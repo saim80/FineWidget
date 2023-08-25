@@ -8,6 +8,7 @@
 #include "InputCoreTypes.h"
 #include "FineConfirmButton.generated.h"
 
+class UTextBlock;
 class UButton;
 
 UENUM()
@@ -35,6 +36,12 @@ public:
 
 	UFUNCTION(BlueprintCallable, BlueprintPure)
 	float GetHoldProgress() const { return ElapsedTime / HoldingTime; }
+
+	UFUNCTION(BlueprintCallable, BlueprintImplementableEvent, Category = "PerilousInteractionConfirmWidget")
+	void SetButtonTitle(const FText& NewTitle);
+
+	UFUNCTION(BlueprintCallable, BlueprintImplementableEvent, Category = "PerilousInteractionConfirmWidget")
+	void SetButtonIcon(const TSoftObjectPtr<UTexture2D>& NewIconTexture);
 
 protected:
 	virtual void NativePreConstruct() override;
@@ -82,5 +89,4 @@ private:
 
 	FDateTime LastKeyPressed;
 	float ClickTimeout = 0.2f;
-
 };
