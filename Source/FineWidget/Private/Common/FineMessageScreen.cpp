@@ -80,9 +80,9 @@ UFineMessageBanner* UFineMessageScreen::DequeueBanner()
 	if (IsValid(Banner))
 	{
 		// Add the banner to the overlay.
-		auto Slot = BannerOverlay->AddChildToOverlay(Banner);
-		Slot->SetHorizontalAlignment(HAlign_Fill);
-		Slot->SetVerticalAlignment(VAlign_Fill);
+		auto _Slot = BannerOverlay->AddChildToOverlay(Banner);
+		_Slot->SetHorizontalAlignment(HAlign_Fill);
+		_Slot->SetVerticalAlignment(VAlign_Fill);
 	}
 	else
 	{

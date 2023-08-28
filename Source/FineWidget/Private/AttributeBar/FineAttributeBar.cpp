@@ -76,22 +76,22 @@ void UFineAttributeBar::NativeConstruct()
 
 void UFineAttributeBar::UpdateAfterStatTypeChanged() const
 {
-	auto BarImage = GetBarImage();
+	auto _BarImage = GetBarImage();
 	// early exit if bar image is not valid.
-	if (!BarImage)
+	if (!_BarImage)
 	{
 		return;
 	}
 	switch (StatType)
 	{
 	case EFineAttributeType::Health:
-		BarImage->SetBrushFromSoftTexture(HealthBarImage);
+		_BarImage->SetBrushFromSoftTexture(HealthBarImage);
 		break;
 	case EFineAttributeType::Mana:
-		BarImage->SetBrushFromSoftTexture(ManaBarImage);
+		_BarImage->SetBrushFromSoftTexture(ManaBarImage);
 		break;
 	case EFineAttributeType::Stamina:
-		BarImage->SetBrushFromSoftTexture(StaminaBarImage);
+		_BarImage->SetBrushFromSoftTexture(StaminaBarImage);
 		break;
 	default:
 		break;
@@ -110,28 +110,28 @@ void UFineAttributeBar::OnStatValueChanged(const FOnAttributeChangeData& OnAttri
 	{
 		return;
 	}
-	float Percent = 0.0f;
+	float _Percent = 0.0f;
 	switch (StatType)
 	{
 	case EFineAttributeType::Health:
 		{
-			Percent = OnAttributeChangeData.NewValue / CharacterGameplay->GetMaxHealth();
+			_Percent = OnAttributeChangeData.NewValue / CharacterGameplay->GetMaxHealth();
 		}
 		break;
 	case EFineAttributeType::Mana:
 		{
-			Percent = OnAttributeChangeData.NewValue / CharacterGameplay->GetMaxMana();
+			_Percent = OnAttributeChangeData.NewValue / CharacterGameplay->GetMaxMana();
 		}
 		break;
 	case EFineAttributeType::Stamina:
 		{
-			Percent = OnAttributeChangeData.NewValue / CharacterGameplay->GetMaxStamina();
+			_Percent = OnAttributeChangeData.NewValue / CharacterGameplay->GetMaxStamina();
 		}
 		break;
 	default:
 		break;
 	}
-	SetPercent(Percent);
+	SetPercent(_Percent);
 	TryShowingIconShakeAnimation();
 	UpdateStatValueTextBlock();
 }
