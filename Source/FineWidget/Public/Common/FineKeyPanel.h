@@ -28,8 +28,6 @@ protected:
 	virtual void NativePreConstruct() override;
 	virtual void NativeConstruct() override;
 
-	UFUNCTION(BlueprintCallable, BlueprintImplementableEvent)
-	void UpdatePresentationDataFromKey();
 	virtual void UpdateKeyPresentation();
 
 private:

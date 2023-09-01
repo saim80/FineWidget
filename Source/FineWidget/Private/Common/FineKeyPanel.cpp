@@ -30,7 +30,7 @@ void UFineKeyPanel::NativeConstruct()
 
 void UFineKeyPanel::UpdateKeyPresentation()
 {
-	UpdatePresentationDataFromKey();
+	KeyTextValue = FText::FromString(Key.ToString());
 	if (IsValid(KeySpacer))
 	{
 		if (!KeyTextValue.IsEmpty() && !KeyIconTexture.IsNull())
