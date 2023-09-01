@@ -21,7 +21,7 @@ class FINEWIDGET_API UFineKeyPanel : public UFineBaseWidget
 
 public:
 	UFUNCTION(BlueprintCallable)
-	void SetKey(const FKey& NewKey);
+	void SetKey(const FKey& NewKey, const bool& RequiresHold);
 	FORCEINLINE const FKey& GetKey() const { return Key; }
 
 protected:
@@ -48,4 +48,11 @@ private:
 	UPROPERTY(BlueprintReadOnly, EditAnywhere, Category = "FineKeyPanel",
 		meta = (AllowPrivateAccess = "true", BindWidgetOptional))
 	UImage* KeyImage;
+	UPROPERTY(BlueprintReadOnly, EditAnywhere, Category = "FineKeyPanel",
+		meta = (AllowPrivateAccess = "true", BindWidgetOptional))
+	UImage* HoldImage;
+
+	UPROPERTY(BlueprintReadOnly, EditAnywhere, Category = "FineKeyPanel",
+		meta = (AllowPrivateAccess = "true", BindWidgetOptional))
+	bool bRequiresHold = false;
 };

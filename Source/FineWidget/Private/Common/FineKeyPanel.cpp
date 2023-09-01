@@ -7,11 +7,21 @@
 #include "Components/Spacer.h"
 #include "Components/TextBlock.h"
 
-void UFineKeyPanel::SetKey(const FKey& NewKey)
+void UFineKeyPanel::SetKey(const FKey& NewKey, const bool& RequiresHold)
 {
+	bool NeedsUpdate = false;
 	if (Key != NewKey)
 	{
 		Key = NewKey;
+		NeedsUpdate = true;
+	}
+	if (bRequiresHold != RequiresHold)
+	{
+		bRequiresHold = RequiresHold;
+		NeedsUpdate = true;
+	}
+	if (NeedsUpdate)
+	{
 		UpdateKeyPresentation();
 	}
 }
@@ -52,6 +62,24 @@ void UFineKeyPanel::UpdateKeyPresentation()
 		else
 		{
 			KeyText->SetVisibility(ESlateVisibility::Collapsed);
+		}
+	}
+	if (IsValid(HoldImage))
+	{
+		if (!KeyTextValue.IsEmpty())
+		{
+			if (bRequiresHold)
+			{
+				HoldImage->SetVisibility(ESlateVisibility::SelfHitTestInvisible);
+			}
+			else
+			{
+				HoldImage->SetVisibility(ESlateVisibility::Collapsed);
+			}
+		}
+		else
+		{
+			HoldImage->SetVisibility(ESlateVisibility::Collapsed);
 		}
 	}
 	if (IsValid(KeyImage))
