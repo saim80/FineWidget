@@ -16,6 +16,7 @@ UFineWidgetScreen::UFineWidgetScreen(): Super()
 	LayerPriority = 0;
 	UserWidget = nullptr;
 	bAutoActivate = true;
+	SetTickableWhenPaused(true);
 }
 
 // Called when the game starts
