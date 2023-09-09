@@ -27,6 +27,7 @@ public class FineWidget : ModuleRules
 			{
 				"Core",
 				"UMG",
+				"CommonUI",
 				"Paper2D",
 				"FineBase", // https://github.com/saim80/FineBase
 				"FinePlay", // https://github.com/saim80/FinePlay

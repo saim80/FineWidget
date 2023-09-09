@@ -3,7 +3,7 @@
 #pragma once
 
 #include "CoreMinimal.h"
-#include "Blueprint/UserWidget.h"
+#include "CommonUserWidget.h"
 #include "UObject/Object.h"
 #include "FineBaseWidget.generated.h"
 
@@ -17,7 +17,7 @@ class UWidgetAnimation;
  * 
  */
 UCLASS(Blueprintable, BlueprintType)
-class FINEWIDGET_API UFineBaseWidget : public UUserWidget
+class FINEWIDGET_API UFineBaseWidget : public UCommonUserWidget
 {
 	GENERATED_BODY()
 
